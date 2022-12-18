@@ -1,4 +1,4 @@
-import { controller } from '@github/catalyst';
+import { attr, controller } from '@github/catalyst';
 import { fromEvent, map } from 'rxjs';
 import { IColorRow, IColorsView } from './types';
 import { clearChildren } from './utilities';
@@ -29,6 +29,8 @@ export default class ColorsTableElement extends HTMLElement implements IColorsVi
 
   private colorTable: IColorRow[] = [];
 
+  @attr isErrored = false;
+
   colorClicked$ = fromEvent(this, 'color-clicked')
     .pipe(
       map((event: Event) => (event as CustomEvent).detail),
@@ -54,6 +56,7 @@ export default class ColorsTableElement extends HTMLElement implements IColorsVi
     const styleElement = document.createElement('style');
     styleElement.textContent = style.toString();
     shadow.appendChild(styleElement);
+    this.tableBody.innerHTML = '<tr><td colspan="3">Loading...</td></tr>';
   }
 
   private onCellClick(color: string) {
@@ -84,5 +87,23 @@ export default class ColorsTableElement extends HTMLElement implements IColorsVi
       rowElement.appendChild(colorCell);
       rowElement.appendChild(primaryColor);
     });
+  }
+
+  private handleErrors() {
+    if (this.isErrored) {
+      clearChildren(this.tableBody);
+      this.tableBody.classList.add('error');
+      this.tableBody.innerHTML = '<tr><td colspan="3">There was an error loading the colors.</td></tr>';
+    } else {
+      this.tableBody.classList.remove('error');
+    }
+  }
+
+  connectedCallback() {
+    this.handleErrors();
+  }
+
+  attributeChangedCallback() {
+    this.handleErrors();
   }
 }

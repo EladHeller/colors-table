@@ -24,4 +24,5 @@ export interface IColorsModel {
 export interface IColorsView extends HTMLElement {
   colorClicked$: Observable<string>;
   colors: IColorRow[];
+  isErrored: boolean;
 }

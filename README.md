@@ -1,2 +1,2 @@
 [![CI](https://github.com/EladHeller/colors-table/actions/workflows/CI.yml/badge.svg)](https://github.com/EladHeller/colors-table/actions/workflows/CI.yml)
-[![codecov](https://codecov.io/gh/EladHeller/colors-table/branch/develop/graph/badge.svg)](https://codecov.io/gh/EladHeller/colors-table)
+[![codecov](https://codecov.io/gh/EladHeller/colors-table/branch/master/graph/badge.svg)](https://codecov.io/gh/EladHeller/colors-table)

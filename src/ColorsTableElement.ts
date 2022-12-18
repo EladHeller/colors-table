@@ -1,5 +1,4 @@
 import { controller } from '@github/catalyst';
-import { html, render } from '@github/jtml';
 import { fromEvent, map } from 'rxjs';
 import { IColorRow, IColorsView } from './types';
 import { clearChildren } from './utilities';
@@ -8,14 +7,14 @@ import ColorCellElement from './ColorCellElement';
 
 type ColorClickedCallback = (color: string) => void;
 
-function createColorCell(
+export function createColorCell(
   color: string,
   isActive: boolean,
   isPrimary: boolean,
   onClick?: ColorClickedCallback,
 ) {
   const cellElement = new ColorCellElement();
-  cellElement.cellCollor = color;
+  cellElement.cellColor = color;
   cellElement.isActive = isPrimary || isActive;
   cellElement.isPrimary = isPrimary;
   cellElement.addEventListener('click', () => {
@@ -49,11 +48,11 @@ export default class ColorsTableElement extends HTMLElement implements IColorsVi
     const shadow = this.attachShadow({ mode: 'open' });
     const table = document.createElement('table');
     shadow.appendChild(table);
-    render(html`<thead><tr><th>#</th><th>Colors</th><th>Primary</th></tr></thead>`, table);
+    table.innerHTML = '<thead><tr><th>#</th><th>Colors</th><th>Primary</th></tr></thead>';
     table.appendChild(this.tableBody);
 
     const styleElement = document.createElement('style');
-    styleElement.textContent = style;
+    styleElement.textContent = style.toString();
     shadow.appendChild(styleElement);
   }
 

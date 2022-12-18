@@ -3,7 +3,7 @@ import style from './ColorCellElement.css';
 
 @controller
 export default class ColorCellElement extends HTMLElement {
-  @attr cellCollor = 'black';
+  @attr cellColor = 'black';
 
   @attr isActive = false;
 
@@ -15,7 +15,7 @@ export default class ColorCellElement extends HTMLElement {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
     const styleElement = document.createElement('style');
-    styleElement.textContent = style;
+    styleElement.textContent = style.toString();
     shadow.appendChild(styleElement);
     shadow.appendChild(this.container);
     this.container.id = 'container';
@@ -30,9 +30,9 @@ export default class ColorCellElement extends HTMLElement {
   }
 
   render() {
-    this.container.style.border = `${this.cellCollor} 5px solid`;
+    this.container.style.border = `${this.cellColor} 5px solid`;
     if (this.isActive) {
-      this.container.style.backgroundColor = this.cellCollor;
+      this.container.style.backgroundColor = this.cellColor;
     }
     if (this.isPrimary) {
       this.container.classList.toggle('primary', this.isPrimary);

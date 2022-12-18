@@ -3,13 +3,14 @@ module.exports = {
     ['@babel/preset-env', {
       modules: false,
       targets: {
-        chrome: '70',
+        chrome: '90',
       },
     }],
     ['@babel/preset-typescript'],
   ],
   plugins: [
     ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: false }],
   ],
   env: {
     test: {

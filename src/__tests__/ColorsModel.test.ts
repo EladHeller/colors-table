@@ -164,4 +164,17 @@ describe('ColorsModel', () => {
 
     expect(result).toEqual(expected);
   });
+
+  it('should handle errors from data layer', () => {
+    let errorResult;
+    colorsModel.colorTable$.subscribe({
+      error: (error) => {
+        errorResult = error;
+      },
+    });
+
+    colorsSubject.error(new Error('error'));
+
+    expect(errorResult).toEqual(new Error('error'));
+  });
 });

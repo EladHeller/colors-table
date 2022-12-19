@@ -107,4 +107,32 @@ describe('ColorsTableElement', () => {
 
     expect(colorFromClick).toBe('yellow');
   });
+
+  it('should render error message if isErrored is true', () => {
+    element.isErrored = true;
+
+    const shadowRoot = element.shadowRoot as ShadowRoot;
+    const errorMessage = shadowRoot.querySelector('td');
+
+    expect(errorMessage?.textContent).toBe('There was an error loading the colors.');
+  });
+
+  it('should render error message even if it creates with isError', () => {
+    document.body.innerHTML = '';
+    element = new ColorsTableElement();
+    element.isErrored = true;
+    document.body.appendChild(element);
+
+    const shadowRoot = element.shadowRoot as ShadowRoot;
+    const errorMessage = shadowRoot.querySelector('td');
+
+    expect(errorMessage?.textContent).toBe('There was an error loading the colors.');
+  });
+
+  it('should render loading message if until there is data', () => {
+    const shadowRoot = element.shadowRoot as ShadowRoot;
+    const loadingMessage = shadowRoot.querySelector('td');
+
+    expect(loadingMessage?.textContent).toBe('Loading...');
+  });
 });

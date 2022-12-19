@@ -66,8 +66,13 @@ export default function ColorsModel(colorsDataLayer: IColorsDataLayer): IColorsM
     }),
   );
 
-  merge(colorsLoaded$, colorToggled$).subscribe((colorRows) => {
-    colorsTableSubject.next(colorRows);
+  merge(colorsLoaded$, colorToggled$).subscribe({
+    next: (colorRows) => {
+      colorsTableSubject.next(colorRows);
+    },
+    error: (err) => {
+      colorsTableSubject.error(err);
+    },
   });
 
   function toggleColor(color: string) {

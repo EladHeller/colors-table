@@ -19,6 +19,7 @@ describe('ColorsViewModel', () => {
     colorsView = Object.assign(document.createElement('div'), {
       colorClicked$: colorClickedSubject,
       colors: [],
+      isErrored: false,
     });
     ColorsViewModel(colorsModel, colorsView);
   });
@@ -33,5 +34,10 @@ describe('ColorsViewModel', () => {
     const newColorRows = [{ cells: [{ color: 'red', isActive: true }], primaryColor: 'red' }];
     colorsTableSubject.next(newColorRows);
     expect(colorsView.colors).toEqual(newColorRows);
+  });
+
+  it('should update the isErrored property in the view when the color table changes', () => {
+    colorsTableSubject.error('error');
+    expect(colorsView.isErrored).toBe(true);
   });
 });

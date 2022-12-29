@@ -6,7 +6,10 @@ module.exports = {
         chrome: '90',
       },
     }],
-    ['@babel/preset-typescript'],
+    '@babel/preset-typescript',
+    ['@babel/preset-react', {
+      runtime: 'automatic',
+    }],
   ],
   plugins: [
     ['@babel/plugin-proposal-decorators', { legacy: true }],

@@ -3,12 +3,12 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (_, configuration) => ({
   entry: './src/index.ts',
-  resolve: { extensions: ['.ts', '.js'] },
+  resolve: { extensions: ['.ts', '.js', '.tsx'] },
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.(t|j)s$/,
+        test: /\.(t|j)sx?$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
